@@ -1,0 +1,10 @@
+﻿<div class="draggable-item" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation>
+	<h3>@Title</h3>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+    private bool _isDragging;
+    private bool _isDropped;
+}

@@ -1,0 +1,60 @@
+﻿<div class="dropZone @Class" @ondragover:preventDefault @ondrop="drop" @ondragover="dragOver" @ondragleave="@dragLeave" @ref="@_dropZone">
+	@if (Items != null && Items.Any())
+    {
+		@foreach (var item in Items)
+		{
+			<div class="col-6 bg-secondary">
+				<Item Title="@item.Title" />
+			</div>
+        }
+    }
+    @*@if (ChildContent != null)
+    {
+        @ChildContent
+    }*@
+</div>
+
+@code{
+    [Parameter]
+    public string Class { get; set; }
+    [Parameter]
+    public IEnumerable<DraggableItem> Items { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public EventCallback DragOver { get; set; }
+    [Parameter]
+    public EventCallback DragLeave { get; set; }
+    [Parameter]
+    public EventCallback Drop { get; set; }
+
+    private ElementReference _dropZone;
+    private IEnumerable<DraggableItem> _items;
+
+    protected override void OnInitialized()
+    {
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+            _items = Items;
+
+        return base.OnAfterRenderAsync(firstRender);
+    }
+
+    private void dragOver()
+    {
+        DragOver.InvokeAsync();
+    }
+
+    private void dragLeave()
+    {
+        DragLeave.InvokeAsync();
+    }
+
+    private void drop()
+    {
+        Drop.InvokeAsync();
+    }
+}
