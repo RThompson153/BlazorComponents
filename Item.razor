@@ -2,7 +2,9 @@
 {
 	<div class="draggable-item" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation @ondragenter="onDragStart" @ondrop="onDrop" @ref="@_dropZone">
 		<div class="top" @ondrop:preventDefault @ondrop:stopPropagation style="min-height: 2rem;"></div>
+
 		<h3>@DraggableItem.Title</h3>
+
 		<div class="bottom" @ondrop:preventDefault @ondrop:stopPropagation style="min-height: 2rem;"></div>
 	</div>
 }

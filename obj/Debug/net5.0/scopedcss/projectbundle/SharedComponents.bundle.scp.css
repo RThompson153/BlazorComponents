@@ -1,0 +1,9 @@
+@import '';
+
+/* _content/SharedComponents/DropZone.razor.rz.scp.css */
+.my-component[b-zft7r10ui9] {
+    border: 2px dashed red;
+    padding: 1em;
+    margin: 1em 0;
+    background-image: url('background.png');
+}
