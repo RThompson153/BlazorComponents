@@ -1,10 +1,32 @@
-﻿<div class="draggable-item" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation>
-	<h3>@Title</h3>
-</div>
+﻿@if (DraggableItem != null)
+{
+	<div class="draggable-item" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation @ondragenter="onDragStart" @ondrop="onDrop" @ref="@_dropZone">
+		<div class="top" @ondrop:preventDefault @ondrop:stopPropagation style="min-height: 2rem;"></div>
+		<h3>@DraggableItem.Title</h3>
+		<div class="bottom" @ondrop:preventDefault @ondrop:stopPropagation style="min-height: 2rem;"></div>
+	</div>
+}
 
 @code {
-    [Parameter]
-    public string Title { get; set; }
-    private bool _isDragging;
-    private bool _isDropped;
+	[Parameter]
+	public DraggableItem DraggableItem { get; set; }
+	[Parameter]
+	public EventCallback<DraggableItem> OnDrag { get; set; }
+	[Parameter]
+	public EventCallback<DraggableItem> OnDrop { get; set; }
+
+	private ElementReference _dropZone;
+
+	private void onDragStart()
+	{
+		DraggableItem.IsDragging = true;
+		OnDrag.InvokeAsync(DraggableItem);
+	}
+
+	private void onDrop()
+	{
+		DraggableItem.IsDragging = false;
+		DraggableItem.IsDropped = true;
+		OnDrop.InvokeAsync(DraggableItem);
+	}
 }

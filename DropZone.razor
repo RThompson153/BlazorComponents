@@ -1,13 +1,13 @@
 ﻿<div class="dropZone @Class" @ondragover:preventDefault @ondrop="drop" @ondragover="dragOver" @ondragleave="@dragLeave" @ref="@_dropZone">
-	@if (Items != null && Items.Any())
-    {
-		@foreach (var item in Items)
+	@if (_items != null && _items.Any())
+	{
+		@foreach (var item in _items)
 		{
 			<div class="col-6 bg-secondary">
-				<Item Title="@item.Title" />
+				<Item DraggableItem="@item" OnDrag="dragItem" OnDrop="dropItem" />
 			</div>
-        }
-    }
+		}
+	}
     @*@if (ChildContent != null)
     {
         @ChildContent
@@ -15,46 +15,54 @@
 </div>
 
 @code{
-    [Parameter]
-    public string Class { get; set; }
-    [Parameter]
-    public IEnumerable<DraggableItem> Items { get; set; }
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-    [Parameter]
-    public EventCallback DragOver { get; set; }
-    [Parameter]
-    public EventCallback DragLeave { get; set; }
-    [Parameter]
-    public EventCallback Drop { get; set; }
+	[Parameter]
+	public string Class { get; set; }
+	[Parameter]
+	public IEnumerable<DraggableItem> Items { get; set; }
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+	[Parameter]
+	public EventCallback DragOver { get; set; }
+	[Parameter]
+	public EventCallback DragLeave { get; set; }
+	[Parameter]
+	public EventCallback Drop { get; set; }
 
-    private ElementReference _dropZone;
-    private IEnumerable<DraggableItem> _items;
+	private ElementReference _dropZone;
+	private IEnumerable<DraggableItem> _items;
 
-    protected override void OnInitialized()
-    {
-    }
+	protected override void OnInitialized()
+	{
+		_items = Items;
+	}
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
-    {
-        if(firstRender)
-            _items = Items;
+	private void dragOver()
+	{
+		DragOver.InvokeAsync();
+	}
 
-        return base.OnAfterRenderAsync(firstRender);
-    }
+	private void dragLeave()
+	{
+		DragLeave.InvokeAsync();
+	}
 
-    private void dragOver()
-    {
-        DragOver.InvokeAsync();
-    }
+	private void drop()
+	{
+		Drop.InvokeAsync();
+	}
 
-    private void dragLeave()
-    {
-        DragLeave.InvokeAsync();
-    }
+	private void dragItem(DraggableItem item)
+	{
+		var items = _items.ToList();
+		var index = items.FindIndex(x => x.Id == item.Id);
 
-    private void drop()
-    {
-        Drop.InvokeAsync();
-    }
+		items.Remove(item);
+
+		var bleh = index;
+	}
+
+	private void dropItem(DraggableItem item)
+	{
+		var meh = "";
+	}
 }
