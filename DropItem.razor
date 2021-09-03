@@ -1,7 +1,7 @@
 ﻿@if (Item != null)
 {
-	<div class="draggable-item @_class" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation @ondragover:preventDefault @ondragstart="onDragStart" @ondrop="onDrop" @ondragover="dragOver" @ondragleave="dragLeave" @ref="_dropZone">
-		@*<div class="top" @ondrop:preventDefault @ondrop:stopPropagation style="min-height: 2rem;"></div>*@
+	<div class="draggable-item @_class" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation @ondragover:preventDefault @ondragstart="onDragStart" @ondrop="onDrop" @ondragover="dragOver" @ondragleave="dragLeave">
+		<div class="top" @ondrop:preventDefault @ondrop:stopPropagation @ondragover:preventDefault style="min-height: 2rem;"></div>
 
 		<h3>@Item.Title</h3>
 
@@ -18,16 +18,14 @@
 	public EventCallback<DraggableItem> OnDrop { get; set; }
 
 	private string _class;
-	private ElementReference _dropZone;
-
-	protected override void OnParametersSet()
-	{
-		base.OnParametersSet();
-	}
 
 	private void onDragStart()
 	{
-		DragAndDropState.CurrentItem = Item;
+		Service.SetCurrentItem(Item);
+
+		var meh = Service.CurrentItem;
+
+		Console.WriteLine($"Picked up {Item.Title}");
 	}
 
 	private void dragOver()
@@ -42,6 +40,6 @@
 
 	private void onDrop()
 	{
-		OnDrop.InvokeAsync(Item);
+		Console.WriteLine($"Dropping {Service.CurrentItem.Title} on {Item.Title}");
 	}
 }

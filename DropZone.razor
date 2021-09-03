@@ -5,7 +5,7 @@
 		@foreach (var item in _items)
 		{
 			<div class="col-6 bg-secondary">
-				<DropItem Item="@item" />
+				<DropItem Item="@item" OnDrop="drop" />
 			</div>
 		}
 	}
@@ -26,9 +26,11 @@
 	private ElementReference _dropZone;
 	private IEnumerable<DraggableItem> _items;
 
-	protected override void OnInitialized()
+	protected override async Task OnInitializedAsync()
 	{
 		_items = Items;
+
+		await base.OnInitializedAsync();
 	}
 
 	private void dragOver()
@@ -41,8 +43,10 @@
 		DragLeave.InvokeAsync();
 	}
 
-	private void drop()
+	private void drop(DraggableItem tgt)
 	{
+		var meh = _items;
+
 		Drop.InvokeAsync();
 	}
 }
