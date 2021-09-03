@@ -3,7 +3,6 @@ C:\Users\Home\Desktop\Projects\SharedComponents\bin\Debug\net5.0\SharedComponent
 C:\Users\Home\Desktop\Projects\SharedComponents\bin\Debug\net5.0\SharedComponents.dll
 C:\Users\Home\Desktop\Projects\SharedComponents\bin\Debug\net5.0\ref\SharedComponents.dll
 C:\Users\Home\Desktop\Projects\SharedComponents\bin\Debug\net5.0\SharedComponents.pdb
-C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponents.csproj.AssemblyReference.cache
 C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponents.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponents.AssemblyInfoInputs.cache
 C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponents.AssemblyInfo.cs
@@ -24,8 +23,10 @@ C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponent
 C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponents.dll
 C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\ref\SharedComponents.dll
 C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\SharedComponents.pdb
-C:\Users\Home\Desktop\Projects\sharedcomponents\obj\Debug\net5.0\RazorDeclaration\DropZone.razor.g.cs
-C:\Users\Home\Desktop\Projects\sharedcomponents\obj\Debug\net5.0\Razor\DropZone.razor.g.cs
-C:\Users\Home\Desktop\Projects\sharedcomponents\obj\Debug\net5.0\scopedcss\DropZone.razor.rz.scp.css
-C:\Users\Home\Desktop\Projects\sharedcomponents\obj\Debug\net5.0\RazorDeclaration\Item.razor.g.cs
-C:\Users\Home\Desktop\Projects\sharedcomponents\obj\Debug\net5.0\Razor\Item.razor.g.cs
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\RazorDeclaration\Item.razor.g.cs
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\RazorDeclaration\DropZone.razor.g.cs
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\Razor\Item.razor.g.cs
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\Razor\DropZone.razor.g.cs
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\scopedcss\DropZone.razor.rz.scp.css
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\RazorDeclaration\DropItem.razor.g.cs
+C:\Users\Home\Desktop\Projects\SharedComponents\obj\Debug\net5.0\Razor\DropItem.razor.g.cs

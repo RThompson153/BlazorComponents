@@ -13,7 +13,7 @@ namespace SharedComponents
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\Home\Desktop\Projects\sharedcomponents\_Imports.razor"
+#line 1 "C:\Users\Home\Desktop\Projects\SharedComponents\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
@@ -27,7 +27,7 @@ using Microsoft.AspNetCore.Components.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 8 "C:\Users\Home\Desktop\Projects\sharedcomponents\Item.razor"
+#line 12 "C:\Users\Home\Desktop\Projects\SharedComponents\Item.razor"
        
 	[Parameter]
 	public DraggableItem DraggableItem { get; set; }
@@ -36,15 +36,30 @@ using Microsoft.AspNetCore.Components.Web;
 	[Parameter]
 	public EventCallback<DraggableItem> OnDrop { get; set; }
 
+	private string _class;
+	private ElementReference _dropZone;
+
+	protected override void OnParametersSet()
+	{
+		base.OnParametersSet();
+	}
+
 	private void onDragStart()
 	{
-		DraggableItem.IsDragging = true;
-		OnDrag.InvokeAsync(DraggableItem);
+	}
+
+	private void dragOver()
+	{
+		_class = "bg-warning";
+	}
+
+	private void dragLeave()
+	{
+		_class = "";
 	}
 
 	private void onDrop()
 	{
-		DraggableItem.IsDropped = true;
 		OnDrop.InvokeAsync(DraggableItem);
 	}
 

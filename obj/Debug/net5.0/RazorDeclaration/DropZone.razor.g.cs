@@ -13,7 +13,7 @@ namespace SharedComponents
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\Home\Desktop\Projects\sharedcomponents\_Imports.razor"
+#line 1 "C:\Users\Home\Desktop\Projects\SharedComponents\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
@@ -27,14 +27,12 @@ using Microsoft.AspNetCore.Components.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 17 "C:\Users\Home\Desktop\Projects\sharedcomponents\DropZone.razor"
+#line 14 "C:\Users\Home\Desktop\Projects\SharedComponents\DropZone.razor"
       
 	[Parameter]
 	public string Class { get; set; }
 	[Parameter]
 	public IEnumerable<DraggableItem> Items { get; set; }
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
 	[Parameter]
 	public EventCallback DragOver { get; set; }
 	[Parameter]
@@ -63,21 +61,6 @@ using Microsoft.AspNetCore.Components.Web;
 	private void drop()
 	{
 		Drop.InvokeAsync();
-	}
-
-	private void dragItem(DraggableItem item)
-	{
-		var items = _items.ToList();
-		var index = items.FindIndex(x => x.Id == item.Id);
-
-		items.Remove(item);
-
-		var bleh = index;
-	}
-
-	private void dropItem(DraggableItem item)
-	{
-		var meh = "";
 	}
 
 #line default
