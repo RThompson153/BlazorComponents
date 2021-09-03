@@ -1,17 +1,14 @@
-﻿<div class="dropZone @Class" @ondragover:preventDefault @ondrop="drop" @ondragover="dragOver" @ondragleave="@dragLeave" @ref="@_dropZone">
+﻿@*<div class="dropZone @Class" @ondragover:preventDefault @ondrop="drop" @ondragover="dragOver" @ondragleave="@dragLeave" @ref="@_dropZone">*@
+<div class="dropZone @Class">
 	@if (_items != null && _items.Any())
 	{
 		@foreach (var item in _items)
 		{
 			<div class="col-6 bg-secondary">
-				<Item DraggableItem="@item" OnDrag="dragItem" OnDrop="dropItem" />
+				<Item DraggableItem="@item" />
 			</div>
 		}
 	}
-    @*@if (ChildContent != null)
-    {
-        @ChildContent
-    }*@
 </div>
 
 @code{
@@ -19,8 +16,6 @@
 	public string Class { get; set; }
 	[Parameter]
 	public IEnumerable<DraggableItem> Items { get; set; }
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
 	[Parameter]
 	public EventCallback DragOver { get; set; }
 	[Parameter]
@@ -49,20 +44,5 @@
 	private void drop()
 	{
 		Drop.InvokeAsync();
-	}
-
-	private void dragItem(DraggableItem item)
-	{
-		var items = _items.ToList();
-		var index = items.FindIndex(x => x.Id == item.Id);
-
-		items.Remove(item);
-
-		var bleh = index;
-	}
-
-	private void dropItem(DraggableItem item)
-	{
-		var meh = "";
 	}
 }
