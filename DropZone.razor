@@ -1,11 +1,10 @@
-﻿@*<div class="dropZone @Class" @ondragover:preventDefault @ondrop="drop" @ondragover="dragOver" @ondragleave="@dragLeave" @ref="@_dropZone">*@
-<div class="dropZone @Class">
+﻿<div class="dropZone @Class" @ref="@_dropZone" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
 	@if (_items != null && _items.Any())
 	{
 		@foreach (var item in _items)
 		{
-			<div class="col-6 bg-secondary">
-				<DropItem Item="@item" OnDrop="drop" />
+			<div class="col-6">
+				<DropItem Item="@item" IsDraggable="false" />
 			</div>
 		}
 	}
@@ -21,14 +20,14 @@
 	[Parameter]
 	public EventCallback DragLeave { get; set; }
 	[Parameter]
-	public EventCallback Drop { get; set; }
+	public EventCallback<DraggableItem> Drop { get; set; }
 
 	private ElementReference _dropZone;
 	private IEnumerable<DraggableItem> _items;
 
 	protected override async Task OnInitializedAsync()
 	{
-		_items = Items;
+		_items = Items ??= new List<DraggableItem>();
 
 		await base.OnInitializedAsync();
 	}
@@ -43,10 +42,14 @@
 		DragLeave.InvokeAsync();
 	}
 
-	private void drop(DraggableItem tgt)
+	private void onDrop()
 	{
-		var meh = _items;
+		var items = _items.ToList();
 
-		Drop.InvokeAsync();
+		items.Add(Service.CurrentItem);
+
+		_items = items;
+
+		Drop.InvokeAsync(Service.CurrentItem);
 	}
 }

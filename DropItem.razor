@@ -1,11 +1,7 @@
 ﻿@if (Item != null)
 {
-	<div class="draggable-item @_class" draggable="true" @ondrop:preventDefault @ondrop:stopPropagation @ondragover:preventDefault @ondragstart="onDragStart" @ondrop="onDrop" @ondragover="dragOver" @ondragleave="dragLeave">
-		<div class="top" @ondrop:preventDefault @ondrop:stopPropagation @ondragover:preventDefault style="min-height: 2rem;"></div>
-
+	<div class="draggable-item" id="item_@Item.Id" draggable="@(IsDraggable.ToString().ToLower())" @ondragstart="onDragStart">
 		<h3>@Item.Title</h3>
-
-		@*<div class="bottom" @ondrop:preventDefault @ondrop:stopPropagation style="min-height: 2rem;"></div>*@
 	</div>
 }
 
@@ -13,11 +9,13 @@
 	[Parameter]
 	public DraggableItem Item { get; set; }
 	[Parameter]
+	public bool IsDraggable { get; set; }
+	[Parameter]
 	public EventCallback<DraggableItem> OnDrag { get; set; }
 	[Parameter]
 	public EventCallback<DraggableItem> OnDrop { get; set; }
 
-	private string _class;
+	private bool _isDraggable = true;
 
 	private void onDragStart()
 	{
@@ -25,21 +23,6 @@
 
 		var meh = Service.CurrentItem;
 
-		Console.WriteLine($"Picked up {Item.Title}");
-	}
-
-	private void dragOver()
-	{
-		_class = "bg-warning";
-	}
-
-	private void dragLeave()
-	{
-		_class = "";
-	}
-
-	private void onDrop()
-	{
-		Console.WriteLine($"Dropping {Service.CurrentItem.Title} on {Item.Title}");
+		var a = meh;
 	}
 }
