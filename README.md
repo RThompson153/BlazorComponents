@@ -21,9 +21,10 @@ The drag and drop component is a simple drag and drop tool built in C#.  It work
 | Drop		| User defined callback for the drop event | Optional |
 
 ## DropItem component structure
-| Parameter | Purpose | Requirement |
-| --- | --- | --- |
-| Item		| Item to be dragged | Required |
+| Parameter   | Purpose | Requirement |
+| --- | ---   | --- |
+| Class		  | User defined css classes | Optional |
+| Item		  | Item to be dragged | Required |
 | IsDraggable | User defined parameter that sets the element to draggable.  Defaults to true | Optional |
 | OnDragStart | User defined callback for the drag start event.  A DraggableItem can optionally be sent to the handler | Optional |
 
