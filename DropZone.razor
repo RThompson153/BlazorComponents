@@ -1,5 +1,5 @@
 ﻿<div class="dropZone @Class" @ref="@_dropZone" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
-	@*@if (_items != null && _items.Any())
+	@if (_items != null && _items.Any())
 	{
 		@foreach (var item in _items)
 		{
@@ -7,7 +7,7 @@
 				<DropItem Item="@item" />
 			</div>
 		}
-	}*@
+	}
 </div>
 
 @code{
