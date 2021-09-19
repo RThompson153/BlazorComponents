@@ -4,7 +4,7 @@ A Blazor .wasm library of common components used in front end development.
 I started this project after building some in-house Blazor custom components for the company I was working for.  Since Blazor is so new, there aren't many of these components available, yet.  Because of this, most dev shops are sticking with existing Javascript libraries, understandable, or making their own components, like we did.  For the components that do exist, they're very niched, and often times, don't really fit the end user's needs.  I wanted to create a set of components that does the desired job, but allow the end user to have more control. 
 
 # In Progress
-* Drag and drop
+* Drag and drop - V1.1.0
 
 # Completed
 * Base Drag and drop functionality
@@ -51,10 +51,13 @@ The drag and drop component is a simple drag and drop tool built in C#.  It work
 }
 ```
 
-#Install
+# Install
 Package Manager - ```Install-Package BlazorSharedComponents -Version 1.1.0```
+
 .NET CLI - ```dotnet add package BlazorSharedComponents --version 1.1.0```
+
 Package Reference - ```<PackageReference Include="BlazorSharedComponents" Version="1.1.0" />```
+
 Direct Download - https://www.nuget.org/api/v2/package/BlazorSharedComponents/1.1.0
 
 # To-do
