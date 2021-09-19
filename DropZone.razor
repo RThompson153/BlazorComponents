@@ -1,13 +1,13 @@
 ﻿<div class="dropZone @Class" @ref="@_dropZone" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
-	@if (_items != null && _items.Any())
+	@*@if (_items != null && _items.Any())
 	{
 		@foreach (var item in _items)
 		{
 			<div class="col-6">
-				<DropItem Item="@item" IsDraggable="false" />
+				<DropItem Item="@item" />
 			</div>
 		}
-	}
+	}*@
 </div>
 
 @code{
@@ -16,9 +16,9 @@
 	[Parameter]
 	public IEnumerable<DraggableItem> Items { get; set; }
 	[Parameter]
-	public EventCallback DragOver { get; set; }
+	public EventCallback<DraggableItem?> DragOver { get; set; }
 	[Parameter]
-	public EventCallback DragLeave { get; set; }
+	public EventCallback<DraggableItem?> DragLeave { get; set; }
 	[Parameter]
 	public EventCallback<DraggableItem> Drop { get; set; }
 

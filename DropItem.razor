@@ -1,6 +1,6 @@
 ﻿@if (Item != null)
 {
-	<div class="draggable-item @_isDraggable" draggable="@(IsDraggable.ToString().ToLower())" @ondragstart="onDragStart">
+	<div class="draggable-item" draggable="@(IsDraggable.ToString().ToLower())" @ondragstart="onDragStart">
 		<h3>@Item.Title</h3>
 	</div>
 }
@@ -11,18 +11,12 @@
 	[Parameter]
 	public bool IsDraggable { get; set; }
 	[Parameter]
-	public EventCallback<DraggableItem> OnDrag { get; set; }
-	[Parameter]
-	public EventCallback<DraggableItem> OnDrop { get; set; }
-
-	private bool _isDraggable => (IsDraggable.ToString().ToLower == "true")
+	public EventCallback<DraggableItem> OnDragStart { get; set; }
 
 	private void onDragStart()
 	{
 		Service.SetCurrentItem(Item);
 
-		var meh = Service.CurrentItem;
-
-		var a = meh;
+		OnDragStart.InvokeAsync();
 	}
 }
