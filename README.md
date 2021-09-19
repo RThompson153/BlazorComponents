@@ -51,7 +51,7 @@ The drag and drop component is a simple drag and drop tool built in C#.  It work
 }
 ```
 
-#Install
+# Install
 Package Manager - ```Install-Package BlazorSharedComponents -Version 1.1.0```
 
 .NET CLI - ```dotnet add package BlazorSharedComponents --version 1.1.0```
