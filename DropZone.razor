@@ -1,10 +1,10 @@
-﻿<div class="dropZone @Class" style="height: inherit" @ref="@_dropZone" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
+﻿<div class="dropZone @Class" style="height: inherit" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
 	@if (_items != null && _items.Any())
 	{
 		@foreach (var item in _items)
 		{
 			<div class="col-6">
-				<DropItem Item="@item" OnDrop="dropItemOnItem" />
+				<DropItem />
 			</div>
 		}
 	}
@@ -24,12 +24,11 @@
 	[Parameter]
 	public EventCallback DropItem { get; set; }
 
-	private ElementReference _dropZone;
 	private IEnumerable<DraggableItem> _items;
 
 	protected override async Task OnInitializedAsync()
 	{
-		_items = Items ??= new List<DraggableItem>();
+		_items = Items;
 
 		await base.OnInitializedAsync();
 	}
@@ -46,32 +45,6 @@
 
 	private void onDrop()
 	{
-		var items = _items.ToList();
-
-		if (itemAlreadyInDropZone())
-			return;
-
-		items.Add(Service.CurrentItem);
-
-		_items = items;
-
-		Drop.InvokeAsync(Service.CurrentItem);
+		Drop.InvokeAsync();
 	}
-
-	private void dropItemOnItem(DraggableItem tgt)
-	{
-		var items = _items.ToList();
-		var currItem = Service.CurrentItem;
-
-		var tgtIndex = items.FindIndex(i => i.Id == tgt.Id);
-
-		items.Remove(currItem);
-		items.Insert(tgtIndex, currItem);
-
-		_items = items;
-
-		DropItem.InvokeAsync();
-	}
-
-	private bool itemAlreadyInDropZone() => _items.Any(i => i.Id == Service.CurrentItem.Id);
 }

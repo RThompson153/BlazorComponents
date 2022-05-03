@@ -17,10 +17,8 @@
 
 	private void onDragStart()
 	{
-		Service.SetCurrentItem(Item);
-
 		OnDragStart.InvokeAsync();
 	}
 
-	private void onDrop() => OnDrop.InvokeAsync(Item);
+	private void onDrop() => OnDrop.InvokeAsync();
 }
