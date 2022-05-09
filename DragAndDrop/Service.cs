@@ -2,8 +2,8 @@
 {
 	internal static class Service
 	{
-		internal static DraggableItem CurrentItem;
+		internal static DragAndDropItem CurrentItem;
 
-		internal static void SetCurrentItem(DraggableItem item) => CurrentItem = item;
+		internal static void SetCurrentItem(DragAndDropItem item) => CurrentItem = item;
 	}
 }
