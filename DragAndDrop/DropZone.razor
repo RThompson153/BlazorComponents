@@ -1,4 +1,6 @@
-﻿<div class="dropZone @Class" style="height: inherit" @ref="@_dropZone" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
+﻿@inject IDragAndDropService DragAndDropService
+
+<div class="dropZone @Class" style="height: inherit" @ref="@_dropZone" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
 	@if (_items != null && _items.Any())
 	{
 		@foreach (var item in _items)
@@ -48,11 +50,11 @@
 	{
 		var items = _items.ToList();
 
-		items.Add(Service.CurrentItem);
+		items.Add(DragAndDropService.CurrentItem);
 
 		_items = items;
 
-		Drop.InvokeAsync(Service.CurrentItem);
+		Drop.InvokeAsync(DragAndDropService.CurrentItem);
 	}
 
 }

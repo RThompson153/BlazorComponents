@@ -1,4 +1,6 @@
-﻿@if (Item != null)
+﻿@inject IDragAndDropService DragAndDropService
+
+@if (Item != null)
 {
 	<div class="draggable-item @Class" draggable="@(Item.IsDraggable.ToString().ToLower())" @ondragstart="onDragStart" @ondrop:preventDefault @ondrop:stopPropagation @ondrop="onDrop">
 		<h3>@Item.Title</h3>
@@ -17,7 +19,7 @@
 
 	private void onDragStart()
 	{
-		Service.SetCurrentItem(Item);
+		DragAndDropService.CurrentItem = Item;
 
 		OnDragStart.InvokeAsync();
 	}
