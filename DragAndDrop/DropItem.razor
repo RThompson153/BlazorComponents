@@ -2,7 +2,7 @@
 
 @if (Item != null)
 {
-	<div class="draggable-item @Class" draggable="@(Item.IsDraggable.ToString().ToLower())" @ondragstart="onDragStart" @ondrop:preventDefault @ondrop:stopPropagation @ondrop="onDrop">
+	<div class="draggable-item @Class" draggable="@(Item.IsDraggable.ToString().ToLower())" @ondragstart="onDragStart" @ondrop:preventDefault @ondrop:stopPropagation>
 		<h3>@Item.Title</h3>
 	</div>
 }
@@ -14,8 +14,6 @@
 	public string Class { get; set; }
 	[Parameter]
 	public EventCallback<DragAndDropItem> OnDragStart { get; set; }
-	[Parameter]
-	public EventCallback<DragAndDropItem> OnDrop { get; set; }
 
 	private void onDragStart()
 	{
@@ -23,6 +21,4 @@
 
 		OnDragStart.InvokeAsync();
 	}
-
-	private void onDrop() => OnDrop.InvokeAsync(Item);
 }

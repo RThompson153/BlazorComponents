@@ -13,7 +13,7 @@
 	else
 	{
 		<div class="d-flex" style="height: inherit">
-			<p class="m-auto">@_dzText</p>
+			<p class="m-auto">@Text</p>
 		</div>
 	}
 </div>
@@ -22,7 +22,7 @@
 	[Parameter]
 	public string Class { get; set; }
 	[Parameter]
-	public string DZText { get; set; }
+	public string Text { get; set; }
 	[Parameter]
 	public IEnumerable<DragAndDropItem> Items { get; set; }
 	[Parameter]
@@ -35,7 +35,6 @@
 	public EventCallback DropItem { get; set; }
 
 	private IEnumerable<DragAndDropItem> _items;
-	private string _dzText;
 
 	protected override void OnInitialized()
 	{
@@ -46,8 +45,6 @@
 
 	protected override void OnParametersSet()
 	{
-		_dzText = DZText;
-
 		base.OnParametersSet();
 	}
 
