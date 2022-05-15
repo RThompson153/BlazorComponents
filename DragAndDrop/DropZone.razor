@@ -5,14 +5,16 @@
 	{
 		@foreach (var item in _items)
 		{
-			<div class="col-6">
+			<div class="col-12">
 				<DropItem Item="@item" />
 			</div>
 		}
 	}
 	else
 	{
-		<p class="m-auto">@_dzText</p>
+		<div class="d-flex" style="height: inherit">
+			<p class="m-auto">@_dzText</p>
+		</div>
 	}
 </div>
 
