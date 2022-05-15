@@ -1,0 +1,73 @@
+﻿@inject IDragAndDropService DragAndDropService
+
+<div class="dropZone @Class" style="height: inherit" @ondragover:preventDefault @ondrop:preventDefault @ondrop:stopPropagation @ondragover="dragOver" @ondrop="onDrop">
+	@if (_items != null && _items.Any())
+	{
+		@foreach (var item in _items)
+		{
+			<div class="col-6">
+				<DropItem Item="@item" />
+			</div>
+		}
+	}
+	else
+	{
+		<p class="m-auto">@_dzText</p>
+	}
+</div>
+
+@code{
+	[Parameter]
+	public string Class { get; set; }
+	[Parameter]
+	public string DZText { get; set; }
+	[Parameter]
+	public IEnumerable<DragAndDropItem> Items { get; set; }
+	[Parameter]
+	public EventCallback<DragAndDropItem> DragOver { get; set; }
+	[Parameter]
+	public EventCallback<DragAndDropItem> DragLeave { get; set; }
+	[Parameter]
+	public EventCallback<DragAndDropItem> Drop { get; set; }
+	[Parameter]
+	public EventCallback DropItem { get; set; }
+
+	private IEnumerable<DragAndDropItem> _items;
+	private string _dzText;
+
+	protected override void OnInitialized()
+	{
+		_items = Items ??= new List<DragAndDropItem>();
+
+		base.OnInitialized();
+	}
+
+	protected override void OnParametersSet()
+	{
+		_dzText = DZText;
+
+		base.OnParametersSet();
+	}
+
+
+	private void dragOver()
+	{
+		DragOver.InvokeAsync();
+	}
+
+    private void dragLeave()
+	{
+        DragLeave.InvokeAsync();
+	}
+
+	private void onDrop()
+	{
+		var items = _items.ToList();
+
+		items.Add(DragAndDropService.CurrentItem);
+
+		_items = items;
+
+		Drop.InvokeAsync(DragAndDropService.CurrentItem);
+	}
+}
