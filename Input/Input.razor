@@ -1,0 +1,23 @@
+﻿@switch(Type)
+{
+	case InputTypes.Dropdown:
+		<select></select>
+		break;
+	case InputTypes.Radio:
+		<input type="radio" />
+		break;
+	case InputTypes.CheckBox:
+		<input type="checkbox" />
+		break;
+	case InputTypes.Number:
+		<input type="number" />
+		break;
+	default:
+		<input type="text" />
+		break;
+}
+
+@code {
+	[Parameter]
+	public InputTypes Type { get; set; }
+}
