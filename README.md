@@ -23,7 +23,6 @@ The drag and drop component is a simple drag and drop tool built in C#.  It work
 | DragOver	| User defined callback for the dragover event.  A DraggableItem can optionally be sent to the handler | Optional |
 | DragLeave | User defined callback for the drag leave event | Optional |
 | Drop		| User defined callback for the drop event | Optional |
- 
 
 ## DropItem component structure
 | Parameter   | Purpose | Requirement |
@@ -33,28 +32,16 @@ The drag and drop component is a simple drag and drop tool built in C#.  It work
 | IsDraggable | User defined parameter that sets the element to draggable.  Defaults to true | Optional |
 | OnDragStart | User defined callback for the drag start event.  A DraggableItem can optionally be sent to the handler | Optional |
 
-## Example and usage
-**Application** *page.razor*
-```
-<div>
-	@foreach(var item in items)
-	{
-		<DropItem Item="@item" />
-	}
-</div>
-<div>
-	<DropZone />
-</div>
-
-@code{
-	IEnumerable<DraggableItem> items;
-
-	protected override *LifecycleMethod()*
-	{
-		*Set list of items to be used.*
-	}
-}
-```
+## Input component structure
+| Parameter   | Purpose | Requirement |
+| --- | ---   | --- |
+| Label		  | Label for the input component | Optional |
+| Type		  | Type of input component.  Defaults to text input | Optional |
+| Name		  | Name of the input component. | Required |
+| Value		  | Value of the input component | Required |
+| MaxLength   | Maximum value length of the input component | Optional |
+| Content	  | Content to add to the component. | Optional |
+| Callback	  | User defined callback. | Optional |
 
 # Install
 Package Manager - ```Install-Package BlazorSharedComponents -Version 1.1.0```

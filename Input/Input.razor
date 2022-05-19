@@ -1,23 +1,69 @@
-﻿@switch(Type)
+﻿<label for="@Name">@Label</label>
+@switch(Type)
 {
 	case InputTypes.Dropdown:
-		<select></select>
+		<select name="@Name" @onchange="onChange">
+			@if(Content != null)
+				{
+					@Content
+				}
+		</select>
 		break;
 	case InputTypes.Radio:
-		<input type="radio" />
+		<input type="radio" value="@_value" name="@Name" />
 		break;
 	case InputTypes.CheckBox:
-		<input type="checkbox" />
+		<input type="checkbox" value="@_value" name="@Name" />
 		break;
 	case InputTypes.Number:
-		<input type="number" />
+		<input type="number" value="@_value" name="@Name" min="0" max="@MaxLength" />
 		break;
 	default:
-		<input type="text" />
+		<input type="text" value="@_value" name="@Name" />
 		break;
 }
 
 @code {
 	[Parameter]
+	public string Label { get; set; }
+	[Parameter]
 	public InputTypes Type { get; set; }
+	[Parameter]
+	public string Name { get; set; }
+	[Parameter]
+	public object Value { get; set; }
+	[Parameter]
+	public decimal MaxLength { get; set; }
+	[Parameter]
+	public RenderFragment? Content { get; set; }
+	[Parameter]
+	public EventCallback Callback { get; set; }
+
+	private object _value;
+
+	protected override void OnInitialized()
+	{
+		//assertRequiredParameter("Name", Name);
+		//assertRequiredParameter("Value", Value);
+
+		base.OnInitialized();
+	}
+
+	protected override void OnParametersSet()
+	{
+		_value = Value;
+
+		base.OnParametersSet();
+	}
+
+	private void onChange(ChangeEventArgs e)
+	{
+		Console.WriteLine(e.Value);
+	}
+
+	private void assertRequiredParameter(string paramName, object param)
+	{
+		if(param is null)
+			throw new Exception($"The parameter {paramName} is required");
+	}
 }
