@@ -1,8 +1,10 @@
-﻿<label for="@Name">@Label</label>
+﻿@using System.Timers
+
+<label for="@Name">@Label</label>
 @switch(Type)
 {
 	case InputTypes.Dropdown:
-		<select name="@Name" @onchange="onChange">
+		<select value="@_value" name="@Name" @onchange="onChange">
 			@if(Content != null)
 				{
 					@Content
@@ -10,16 +12,16 @@
 		</select>
 		break;
 	case InputTypes.Radio:
-		<input type="radio" value="@_value" name="@Name" />
+		<input type="radio" value="@_value" name="@Name" checked="@_value" @onclick="onCheck" />
 		break;
 	case InputTypes.CheckBox:
-		<input type="checkbox" value="@_value" name="@Name" />
+		<input type="checkbox" value="@_value" name="@Name" checked="@_value" @onclick="onCheck" />
 		break;
 	case InputTypes.Number:
-		<input type="number" value="@_value" name="@Name" min="0" max="@MaxLength" />
+		<input type="number" value="@_value" name="@Name" min="0" max="@MaxLength" @oninput="onChange"/>
 		break;
 	default:
-		<input type="text" value="@_value" name="@Name" />
+		<input type="text" value="@_value" name="@Name" maxlength="@MaxLength" @oninput="onInput" @onkeyup="onKeyup" />
 		break;
 }
 
@@ -35,11 +37,15 @@
 	[Parameter]
 	public decimal MaxLength { get; set; }
 	[Parameter]
+	public double? Timeout { get; set; }
+	[Parameter]
 	public RenderFragment? Content { get; set; }
 	[Parameter]
 	public EventCallback Callback { get; set; }
 
 	private object _value;
+	private bool _checked;
+	private Timer _timer;
 
 	protected override void OnInitialized()
 	{
@@ -52,13 +58,64 @@
 	protected override void OnParametersSet()
 	{
 		_value = Value;
+		bool.TryParse(_value?.ToString(), out _checked);
+
+		if(Timeout is not null)
+		{
+			_timer = new Timer();
+			_timer.Interval = Timeout.GetValueOrDefault();
+			_timer.Elapsed += (x, y) => Callback.InvokeAsync(_value);
+			_timer.AutoReset = false;
+		}
 
 		base.OnParametersSet();
 	}
 
 	private void onChange(ChangeEventArgs e)
 	{
-		Console.WriteLine(e.Value);
+		_value = e.Value;
+
+		if(_timer is not null)
+		{
+			_timer.Stop();
+			_timer.Start();
+		}
+		else
+		{
+			Callback.InvokeAsync(_value);
+		}
+	}
+
+	private void onCheck()
+	{
+		_checked = !_checked;
+
+		_value = _checked;
+
+		if(_timer is not null)
+		{
+			_timer.Stop();
+			_timer.Start();
+		}
+		else
+		{
+			Callback.InvokeAsync(_value);
+		}
+	}
+
+	private void onInput(ChangeEventArgs e) => _value = e.Value;
+
+	private void onKeyup()
+	{
+		if(_timer is not null)
+		{
+			_timer.Stop();
+			_timer.Start();
+		}
+		else
+		{
+			Callback.InvokeAsync(_value);
+		}
 	}
 
 	private void assertRequiredParameter(string paramName, object param)

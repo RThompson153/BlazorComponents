@@ -2,7 +2,7 @@
 {
 	public enum InputTypes
 	{
-		Text, Number, Decimal, CheckBox, Radio, Dropdown
+		Text, Number, CheckBox, Radio, Dropdown
 	}
 
 	public enum LabelPosition
